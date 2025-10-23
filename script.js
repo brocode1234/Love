@@ -6,28 +6,20 @@ const msg = document.getElementById("message");
 const music = document.getElementById("music");
 
 const royalMessage = `
-I was blind to your love, cruel with my words, and careless with your heart. Now I see you were the rarest soul I could ever find  
+I was blind to your love, cruel with my words, and careless with your heart. Now I see you were the rarest soul I could ever find.  
 Sorry di thangameh❤️
 `;
-
-enterBtn.addEventListener("click", () => {
-  intro.style.opacity = "0";
-  setTimeout(() => {
-    intro.style.display = "none";
-    scrollContainer.style.display = "flex";
-    music.play();
-    setTimeout(() => scroll.style.transform = "scaleY(1)", 300);
-    setTimeout(() => typeMessage(), 2500);
-    spawnHearts();
-  }, 1000);
-});
 
 function typeMessage() {
   let i = 0;
   const typing = setInterval(() => {
     msg.innerHTML = royalMessage.slice(0, i++);
     msg.classList.add("show");
-    if (i > royalMessage.length) clearInterval(typing);
+    if (i > royalMessage.length) {
+      clearInterval(typing);
+      // Show poll after message finishes
+      document.getElementById("poll").style.display = "block";
+    }
   }, 40);
 }
 
@@ -44,3 +36,15 @@ function spawnHearts() {
     setTimeout(() => heart.remove(), 6000);
   }, 400);
 }
+
+enterBtn.addEventListener("click", () => {
+  intro.style.opacity = "0";
+  setTimeout(() => {
+    intro.style.display = "none";
+    scrollContainer.style.display = "flex";
+    music.play();
+    setTimeout(() => scroll.style.transform = "scaleY(1)", 300);
+    setTimeout(() => typeMessage(), 2500);
+    spawnHearts();
+  }, 1000);
+});
